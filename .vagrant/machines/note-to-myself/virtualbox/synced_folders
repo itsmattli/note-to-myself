@@ -1,0 +1,1 @@
+{"virtualbox":{"/home/vagrant/Code/note-to-myself":{"type":null,"mount_options":[],"guestpath":"/home/vagrant/Code/note-to-myself","hostpath":"C:/Users/Matthew/Desktop/COMP3975/note-to-myself","disabled":false,"__vagrantfile":true},"/vagrant":{"guestpath":"/vagrant","hostpath":"C:/Users/Matthew/Desktop/COMP3975/note-to-myself","disabled":false,"__vagrantfile":true}}}
