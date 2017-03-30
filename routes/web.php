@@ -17,6 +17,13 @@ Route::get('/', function () {
 
 Route::post('/processLogin', 'LoginController@login');
 
+Route::get('/notes', 'NoteController@index');
+
 Auth::routes();
 
 Route::get('/home', 'HomeController@index');
+Route::get('/register', function() {
+    return view('register');
+});
+
+Route::get('/captcha', 'LoginController@getCaptcha');

@@ -46,7 +46,7 @@
 				</p>
 		</li>
 		<li>
-				<p><a href="register2.php">Register</a> | <a href="forgotpassword.php">Forgot password</a>
+				<p><a href="/register">Register</a> | <a href="forgotpassword.php">Forgot password</a>
 				</p>
         </li>
         <li id="errormessage" style="color:red;"></li>
