@@ -46,7 +46,6 @@
 
             <div id="column3">
                 <h2>images</h2><h3>click for full size</h3>
-                <!-- <textarea cols="16" rows="40" id="image" name="image" /></textarea> -->
 
                 <input type="file" name="i" /><br /><br />
 
@@ -62,7 +61,7 @@
 
             <div id="column4">
                 <h2>tbd</h2>
-                <textarea cols="16" rows="40" id="tbd" name="tbd" />asdf</textarea>
+                <textarea cols="16" rows="40" id="tbd" name="tbd" /></textarea>
             </div>
 
         </div>
