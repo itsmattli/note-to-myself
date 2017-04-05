@@ -18,7 +18,7 @@
 
 <div id="wrapper">
     <form action="notes.php" enctype="multipart/form-data" method="post">
-        <h2 id="header">li.matthew.m@gmail.com - <span><a href="logout.php">Log out</a></span></h2>
+        <h2 id="header">{{Auth::user()->email}} - <span><a href="{{route('logout')}}">Log out</a></span></h2>
 
 
         <div id="section1">

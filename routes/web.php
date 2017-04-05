@@ -11,25 +11,20 @@
 |
 */
 
+
 Route::get('/', function () {
-    return view('auth.login');
+    return view('welcome');
 });
 
-Route::post('/processLogin', 'LoginController@login');
-
-Route::get('/notes', 'NoteController@index');
-
-//Auth::routes();
+Auth::routes();
 
 Route::get('/home', 'HomeController@index');
 
-Route::get('/register', function() {
-    return view('register');
-});
 
-Route::post('/registeruser', 'RegisterController@create');
+Route::get('/notes', 'NoteController@index');
 
 Route::get('/captcha', 'LoginController@getCaptcha');
 Auth::routes();
 
 Route::get('/home', 'HomeController@index');
+Route::get('logout', '\App\Http\Controllers\Auth\LoginController@logout');
