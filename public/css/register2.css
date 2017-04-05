@@ -1,8 +1,7 @@
 
 
 #captcha{
-    border-style:solid;
-    border:width: 1px;
+    border: solid 1px;
     margin-bottom: 5px;
 }
 
@@ -39,14 +38,12 @@ ul p
 
 #validEmail, #validPass, #validPassConf
 {
-
     margin-left: 9px;
     position: absolute;
     width: 16px;
     height: 16px;
     display:inline;
 }
-
 
 ul h3
 {
@@ -76,6 +73,14 @@ ul input[type="text"], ul input[type="password"]
 ul input.required
 {
     border: solid 1px #f00;
+}
+
+.g-recaptcha {
+    display:inline-block;
+}
+
+#recapchalabel {
+    visibility: hidden;
 }
 
 a:link {text-decoration: none; color:blue;}

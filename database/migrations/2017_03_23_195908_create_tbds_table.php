@@ -13,7 +13,7 @@ class CreateTbdsTable extends Migration
      */
     public function up()
     {
-        Schema::table('tbds', function (Blueprint $table) {
+        Schema::create('tbds', function (Blueprint $table) {
             $table->increments('id');
             $table->unsignedInteger('user_ref');
             $table->string('tbd');

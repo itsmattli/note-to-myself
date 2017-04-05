@@ -199,10 +199,10 @@ function isValidEmailAddress(emailAddress) {
 
 
 
-function isFormDataValid(){
+function isFormDataValid() {
 
     var dataIsValid = true;
-    var message     = "";
+    var message = "";
     $('#errormessage').hide();
 
     // is the email address valid?
@@ -212,103 +212,70 @@ function isFormDataValid(){
     // is the captcha correct?
     // if so, the form data is valid so return true (else return false)
 
-    if(dataIsValid == true)
-    {
-        if(!(isValidEmailAddress($("#email").val()))){
+    if (dataIsValid == true) {
+        if (!(isValidEmailAddress($("#email").val()))) {
             dataIsValid = false;
 
             message = "Invalid email address: " + $("#email").val();
         }
     }
 
-    if(dataIsValid == true)
-    {
-        if($("#passwd").val().length < 1){
+    if (dataIsValid == true) {
+        if ($("#passwd").val().length < 1) {
             dataIsValid = false;
             message = "Password missing";
         }
     }
 
 
-    if(dataIsValid == true)
-    {
-        if($("#passwd").val().length < 6){
+    if (dataIsValid == true) {
+        if ($("#passwd").val().length < 6) {
             dataIsValid = false;
             message = "Password too short";
         }
     }
 
 
-
-    if(dataIsValid == true)
-    {
-        if($("#passwd_conf").val().length < 1){
+    if (dataIsValid == true) {
+        if ($("#passwd_conf").val().length < 1) {
             dataIsValid = false;
             message = "Password confirmation missing";
         }
     }
 
 
-    if(dataIsValid == true)
-    {
-        if($("#passwd").val() != $("#passwd_conf").val()){
+    if (dataIsValid == true) {
+        if ($("#passwd").val() != $("#passwd_conf").val()) {
             dataIsValid = false;
             message = "Passwords do not match";
         }
     }
 
 
-    if(dataIsValid == true)
-    {
+    if (dataIsValid == true) {
         // no tags allowed
-        if($("#passwd").val().indexOf('<') != -1){
+        if ($("#passwd").val().indexOf('<') != -1) {
             dataIsValid = false;
             message = "Ilegal character in password";
         }
     }
 
-    if(dataIsValid == true)
-    {
-        if($("#passwd").val().indexOf('>') != -1){
+    if (dataIsValid == true) {
+        if ($("#passwd").val().indexOf('>') != -1) {
             dataIsValid = false;
             message = "Ilegal character in password";
         }
     }
 
 
-    if(dataIsValid == true)
-    {
-        if($("#code").val().length != 4){
+    if (dataIsValid == true) {
+        if ($("#code").val().length != 4) {
             dataIsValid = false;
             message = "Incorrect CAPTCHA code entered";
         }
     }
-
-
-    /*
-     if(!(isValidCaptchaCode($("#code").val()))){
-     //dataIsValid = false;
-     message = "Incorrect CAPTCHA code entered (maybe)";
-     }
-
-     */
-
-    /* pause
-     if(dataIsValid == true)
-     {
-     isValidCaptchaCode($("#code").val());
-
-     if(itsValid != "success")
-     {
-     dataIsValid = false;
-     //				alert('finally true');
-     message = "Incorrect CAPTCHA code entered";
-     }
-     itsValid = false; // reset it
-     }
-
-     */
-
+}
+/*
     if(false == dataIsValid){
         $('#errormessage').text(message);
         //$('#errormessage').show('slow');
@@ -320,57 +287,5 @@ function isFormDataValid(){
         var message     = "";
         $('#errormessage').hide();
     }
-    /*
-     if(dataIsValid == true){
-     alert('valid');
-     }else{
-     alert('invalid');
-     }
-     */
     return dataIsValid;
-}
-
-
-/*
- var itsValid = false;
-
- function isValidCaptchaCode(attempt){
-
- //
- itsValid = $.ajax({
- url: "validatecaptcha.php?captcha_code=" + $("#code").val(),
- async: false
- }).responseText;
-
-
- //alert("VALIDATION TIME! " + itsValid);
- }
- */
-//
-
-/*
- $.post("validatecaptcha.php", {
-
-
- captcha_code: attempt},
- function(data){
- var isValid = false;
- if(data=="success"){
-
- //alert("CAPTCHA IS VALID: " + attempt);
- makeValid(true);
- return true;
- }else{
- //alert("CAPTCHA IS NOT VALID");
- makeValid(false);
- return false;
- }
- });	*/
-//}
-/*
-
- function makeValid(val)
- {
- //alert("VALIDATION TIME! " + itsValid);
- itsValid = val;
- }*/
+}*/

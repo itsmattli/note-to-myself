@@ -12,18 +12,24 @@
 */
 
 Route::get('/', function () {
-    return view('login');
+    return view('auth.login');
 });
 
 Route::post('/processLogin', 'LoginController@login');
 
 Route::get('/notes', 'NoteController@index');
 
-Auth::routes();
+//Auth::routes();
 
 Route::get('/home', 'HomeController@index');
+
 Route::get('/register', function() {
     return view('register');
 });
 
+Route::post('/registeruser', 'RegisterController@create');
+
 Route::get('/captcha', 'LoginController@getCaptcha');
+Auth::routes();
+
+Route::get('/home', 'HomeController@index');
