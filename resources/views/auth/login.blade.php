@@ -4,6 +4,9 @@
 <div class="container">
     <div class="row">
         <div class="col-md-8 col-md-offset-2">
+            @if(session('confirm'))
+                <p class="alert {{ Session::get('alert-class', 'alert-info') }}">{{ Session::get('confirm') }}</p>
+            @endif
             <div class="panel panel-default">
                 <div class="panel-heading">Login</div>
                 <div class="panel-body">

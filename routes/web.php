@@ -28,3 +28,7 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index');
 Route::get('logout', '\App\Http\Controllers\Auth\LoginController@logout');
+Route::post('/reg', 'RegistrationController@store');
+
+Route::get('/emailtest', 'NoteController@email');
+Route::get('/reg/verify/{confirmationCode}', 'RegistrationController@confirm');

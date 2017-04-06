@@ -61,9 +61,12 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
+        $conf = str_random(30);
         return User::create([
+            'confirmation_code' => $conf,
             'email' => $data['email'],
             'password' => bcrypt($data['password']),
         ]);
+
     }
 }
