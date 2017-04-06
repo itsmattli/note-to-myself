@@ -7,6 +7,21 @@
             @if(session('confirm'))
                 <p class="alert {{ Session::get('alert-class', 'alert-info') }}">{{ Session::get('confirm') }}</p>
             @endif
+            @if(session('not_confirmed'))
+                <p class="alert {{ Session::get('alert-class', 'alert-warning') }}">{{ Session::get('not_confirmed') }}</p>
+            @endif
+            @if(session('invalid_url'))
+                <p class="alert {{ Session::get('alert-class', 'alert-warning') }}">{{ Session::get('invalid_url') }}</p>
+            @endif
+            @if(session('user_not_found'))
+                <p class="alert {{ Session::get('alert-class', 'alert-warning') }}">{{ Session::get('user_not_found') }}</p>
+            @endif
+            @if(session('could_not_confirm'))
+                <p class="alert {{ Session::get('alert-class', 'alert-warning') }}">{{ Session::get('could_not_confirm') }}</p>
+            @endif
+            @if(session('confirmed'))
+                <p class="alert {{ Session::get('alert-class', 'alert-success') }}">{{ Session::get('confirmed') }}</p>
+            @endif
             <div class="panel panel-default">
                 <div class="panel-heading">Login</div>
                 <div class="panel-body">

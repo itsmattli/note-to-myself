@@ -31,4 +31,4 @@ Route::get('logout', '\App\Http\Controllers\Auth\LoginController@logout');
 Route::post('/reg', 'RegistrationController@store');
 
 Route::get('/emailtest', 'NoteController@email');
-Route::get('/reg/verify/{confirmationCode}', 'RegistrationController@confirm');
+Route::get('/reg/verify/{conf_code}', 'ConfirmController@confirm');
