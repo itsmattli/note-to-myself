@@ -14,49 +14,10 @@ use Illuminate\Support\Facades\Session;
 
 class NoteController extends Controller
 {
-    /*
-     * Notes
-     */
-
-    public function editLink(Request $req) {
-        try {
-            $link = Link::findOrFail($req->id);
-        } catch (ModelNotFoundException $e) {
-            Session::flash('error', "Could not edit link, please try again");
-            return redirect()->back();
-        }
-        $link->link = $req->link;
-        $link->save();
-        return redirect()->back();
+    public function __construct()
+    {
+        $this->middleware('auth');
     }
-
-    public function deleteLink(Request $req) {
-        try {
-            $link = Link::findOrFail($req->id);
-        } catch (ModelNotFoundException $e) {
-            Session::flash('error', "Could not find associated link, please try again");
-            return redirect()->back();
-        }
-        try {
-            $link->delete();
-        } catch (QueryException $e) {
-            Session::flash('error', "Could not delete associated link, please try again");
-            return redirect()->back();
-        }
-        return redirect()->back();
-    }
-
-    public function addLink(Request $req) {
-        $link = new Link;
-        $link->link = $req->link;
-        $link->user_ref = Auth::id();
-        $link->save();
-        return redirect()->back();
-    }
-
-    /*
-     * Images
-     */
 
     public function addImage() {
         $images = Image::where('user_ref', Auth::id())->count();
@@ -74,24 +35,24 @@ class NoteController extends Controller
         return Image::where('user_ref', Auth::id())->get();
     }
 
-    public function getNotes() {
-        return Note::where('user_ref', Auth::id())->get();
+    public function getNote() {
+        return Note::where('user_ref', Auth::id())->first();
     }
 
     public function getLinks() {
         return Link::where('user_ref', Auth::id())->get();
     }
 
-    public function getTbds() {
-        return Tbd::where('user_ref', Auth::id())->get();
+    public function getTbd() {
+        return Tbd::where('user_ref', Auth::id())->first();
     }
 
 
     public function index() {
         $images = $this->getImages();
-        $notes = $this->getNotes();
+        $note = $this->getNote();
         $links = $this->getLinks();
-        $tbds = $this->getTbds();
-        return view('notes', compact('images','links', 'notes', 'tbds'));
+        $tbd = $this->getTbd();
+        return view('notes', compact('images','links', 'note', 'tbd'));
     }
 }

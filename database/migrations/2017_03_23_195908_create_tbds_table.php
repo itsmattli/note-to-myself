@@ -16,7 +16,7 @@ class CreateTbdsTable extends Migration
         Schema::create('tbds', function (Blueprint $table) {
             $table->increments('id');
             $table->unsignedInteger('user_ref');
-            $table->string('tbd');
+            $table->string('tbd')->nullable();
             $table->timestamps();
         });
     }

@@ -33,7 +33,10 @@ Route::post('/reg', 'RegistrationController@store');
 Route::get('/reg/verify/{conf_code}', 'ConfirmController@confirm');
 Route::get('/unlock/{conf_code}', 'ConfirmController@unlock');
 
-/* Links*/
-Route::post('/editLink', 'NoteController@editLink');
-Route::post('/deleteLink', 'NoteController@deleteLink');
-Route::post('/addLink', 'NoteController@addLink');
+/* Links Controller*/
+Route::post('/editLink', 'LinksController@update');
+Route::post('/deleteLink', 'LinksController@delete');
+Route::post('/addLink', 'LinksController@create');
+
+Route::post('editNote', 'NotesController@update');
+Route::post('editTbd', 'TBDsController@update');

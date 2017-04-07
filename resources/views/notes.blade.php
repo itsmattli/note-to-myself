@@ -8,6 +8,7 @@
         window.onload = function () {
             hideDivs();
             addOnClick();
+            addOnClear();
         }
     </script>
     <div class="container">
@@ -32,8 +33,12 @@
         <div class="row">
             <div class = "col-md-12 notes">
                 <div id="notesdiv" class="notespage">
+                    {{Form::open(['url' => '/editNote', 'id' => 'noteform'])}}
                     <h4><small>Notes</small></h4>
-                    <textarea class="form-control" rows="10" name="notearea"/></textarea>
+                    <textarea class="form-control" rows="10" id="notearea" name="note" form="noteform"/>{{(isset($note)) ? $note->note: ""}}</textarea>
+                    {{ Form::reset('Clear Notes', ['class' => 'btn btn-danger', 'id' => 'clear_note']) }}
+                    {{ Form::submit('Save', ['class' => 'btn btn-success'])}}
+                    {{ Form::close()}}
                     <br />
                 </div>
             </div>
@@ -41,8 +46,13 @@
         <div class="row">
             <div class = "col-md-12 tbds">
                 <div id="tbdsdiv" class="notespage">
+                    {{Form::open(['url' => '/editTbd', 'id' => 'tbdform'])}}
                     <h4><small>TBDs</small></h4>
-                    <textarea class="form-control" rows="10" id="tbdarea" name="tbdarea"/></textarea>
+                    <textarea class="form-control" rows="10" id="tbdarea" name="tbd" form="tbdform"/>{{(isset($tbd)) ? $tbd->tbd: ""}}</textarea>
+                    {{ Form::reset('Clear TBDs', ['class' => 'btn btn-danger', 'id' => 'clear_tbd']) }}
+                    {{ Form::submit('Save', ['class' => 'btn btn-success'])}}
+                    {{ Form::close()}}
+                    <br />
                     <br />
                 </div>
             </div>
@@ -70,26 +80,26 @@
                         </div>
                     @if(isset($links))
                         <table>
-                        @foreach($links as $link)
                             <tr>
                                 <td>
                                     My Links
                                 </td>
                             </tr>
+                        @foreach($links as $link)
                             <tr>
                                 <td>
                                     {{Form::open(["url" => "/editLink", "method" => "POST"])}}
                                         <div class="form-inline">
                                             <input type="text" name="link" value="{{$link->link}}" onclick='openInNew(this);' class="form-control">
                                             <input type="hidden" name="id" value="{{$link->id}}">
-                                            <input type="submit" name="submit" value="Save" class="btn btn-success">
+                                            {{Form::submit('Save', ['class' => 'btn btn-success'])}}
                                         </div>
                                     {{Form::close()}}
                                 </td>
                                 <td>
                                     {{Form::open(["url" => "/deleteLink", "method" => "POST"])}}
                                         <input type="hidden" name="id" value="{{$link->id}}">
-                                        <input type="submit" name="submit" value="Delete" class="btn btn-danger">
+                                    {{Form::submit('Delete', ['class' => 'btn btn-danger'])}}
                                     {{Form::close()}}
                                 </td>
                             </tr>

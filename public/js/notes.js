@@ -20,7 +20,23 @@ function addOnClick() {
     });
 }
 
-function openInNew(row) {
-    var value = row.val()
-    window.open(value);
+function addOnClear() {
+    $('#clear_note').click(function() {
+        $('#notearea').empty();
+    })
+    $('#clear_tbd').click(function() {
+        $('#tbdarea').empty();
+    })
+}
+
+function openInNew(textbox){
+    console.log("in");
+    window.open(getAbsoluteUrl(textbox.value));
+    this.blur();
+}
+
+function getAbsoluteUrl(url) {
+    var a = document.createElement('a');
+    a.href = url;
+    return a.href;
 }
