@@ -43,7 +43,7 @@ function getAbsoluteUrl(url) {
 
 function revealSection(session_active) {
     console.log(session_active.toString());
-    if (session_active == "image") {
+    if (session_active == "picture") {
         $("#imagesdiv").show();
     } else if (session_active == "note") {
         $("#notesdiv").show();

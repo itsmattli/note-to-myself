@@ -80,17 +80,17 @@
                         <h4><small>Images</small></h4>
                         @if(isset($pictures))
                             <table>
+                                <tr>
                                 @foreach($pictures as $picture)
-                                    <tr>
-                                        <td><img src="picture/{{$picture->id}}"></td>
-                                        <td>
-                                            {{Form::open(['url' => '/deletePicture', 'method' => 'POST'])}}
-                                            {{Form::hidden('id', $picture->id)}}
-                                            {{Form::submit('Delete', ['class' => 'btn btn-danger'])}}
-                                            {{Form::close()}}
-                                        </td>
-                                    </tr>
+                                    <td>
+                                        <img src="picture/{{$picture->id}}" height="300">
+                                        {{Form::open(['url' => '/deletePicture', 'method' => 'POST'])}}
+                                        {{Form::hidden('id', $picture->id)}}
+                                        {{Form::submit('Delete', ['class' => 'btn btn-danger'])}}
+                                        {{Form::close()}}
+                                    </td>
                                 @endforeach
+                                </tr>
                             </table>
                         @endif
                         <br />

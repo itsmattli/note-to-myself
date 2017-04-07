@@ -10,20 +10,22 @@ use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Auth;
 use Intervention\Image\Facades\Image;
 use Illuminate\Support\Facades\Response;
+use Illuminate\Support\Facades\Validator;
 
 class PicturesController extends Controller
 {
     public function create(Request $req) {
 
-        $images = Picture::where('user_ref', Auth::id())->count();
-        if ($images >= 4) {
-            Session::flash('error', "You are only allowed 4 images!");
-            return redirect()->back();
+        $validator = Validator::make($req->all(), ['image' => 'required|image|mimes:jpeg,jpg,gif|max:2048']);
+        if($validator->fails()) {
+            return redirect()->back()->with("error", "Image upload requirements not met, try a different image");
         }
 
-        $this->validate($req, [
-            'image' => 'required|image|mimes:jpeg,jpg,gif|max:2048',
-        ]);
+        $images = Picture::where('user_ref', Auth::id())->count();
+        if ($images >= 4) {
+            Session::flash("active", "picture");
+            return redirect()->back()->with("error", "You are only allowed 4 images!" );
+        }
 
         $image = Image::make(Input::file('image'));
         Response::make($image->encode('jpeg'));
@@ -31,9 +33,21 @@ class PicturesController extends Controller
         $picture->user_ref = Auth::id();
         $picture->image = $image;
         $picture->save();
-
+        Session::flash("active", "picture");
         return redirect()->back()->with("success", "Image is uploaded!");
     }
+
+    public function delete(Request $req) {
+        try {
+            $picture = Picture::findOrFail($req->id);
+        } catch (ModelNotFoundException $e) {
+            return redirect()->back()->with("error", "Image to be deleted could not be found, please try again.");
+        }
+        $picture->delete();
+        Session::flash("active", "picture");
+        return redirect()->back()->with("success", "Image was deleted!");
+    }
+
     public function get($id) {
         try {
             $picture = Picture::findOrFail($id);
