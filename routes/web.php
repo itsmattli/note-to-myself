@@ -43,4 +43,5 @@ Route::post('/editTbd', 'TBDsController@update');
 
 /* Images Controller*/
 Route::post('/addPicture', 'PicturesController@create');
-Route::post('/deletePicture', 'PicturesController@deletes');
+Route::post('/deletePicture', 'PicturesController@delete');
+Route::get('/picture/{id}', 'PicturesController@get');

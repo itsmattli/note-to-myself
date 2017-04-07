@@ -19,6 +19,9 @@
         @if(session('error'))
             <p class="alert {{ Session::get('alert-class', 'alert-danger') }}">{{ Session::get('error') }}</p>
         @endif
+        @if(session('success'))
+            <p class="alert {{ Session::get('alert-class', 'alert-success') }}">{{ Session::get('success') }}</p>
+        @endif
         <div class="row">
             <div class="col-md-3">
                 <button class="btn btn-default" id="notebutton"><h4>Notes</h4></button>
@@ -67,7 +70,7 @@
                     <div class="container">
                         <div class="container">
                             <div class="container">
-                                {{Form::open(['url' => '/addImage', 'method' => 'POST', "enctype" => "multipart/form-data"])}}
+                                {{Form::open(['url' => '/addPicture', 'method' => 'POST', "enctype" => "multipart/form-data"])}}
                                 {{Form::label('image', 'Add a New Image')}}
                                 {{Form::file('image', null, ['id' => 'image_up', 'class' => 'form-control'])}}
                                 {{Form::submit('Add Image', ['class' => 'btn btn-success'])}}
@@ -76,8 +79,19 @@
                         </div>
                         <h4><small>Images</small></h4>
                         @if(isset($pictures))
-                            @foreach($pictures as $pictures)
-                            @endforeach
+                            <table>
+                                @foreach($pictures as $picture)
+                                    <tr>
+                                        <td><img src="picture/{{$picture->id}}"></td>
+                                        <td>
+                                            {{Form::open(['url' => '/deletePicture', 'method' => 'POST'])}}
+                                            {{Form::hidden('id', $picture->id)}}
+                                            {{Form::submit('Delete', ['class' => 'btn btn-danger'])}}
+                                            {{Form::close()}}
+                                        </td>
+                                    </tr>
+                                @endforeach
+                            </table>
                         @endif
                         <br />
                     </div>
@@ -110,7 +124,7 @@
                                     {{Form::open(["url" => "/editLink", "method" => "POST"])}}
                                         <div class="form-inline">
                                             <input type="text" name="link" value="{{$link->link}}" onclick='openInNew(this);' class="form-control">
-                                            <input type="hidden" name="id" value="{{$link->id}}">
+                                            {{Form::hidden('id', $link->id)}}
                                             {{Form::submit('Save', ['class' => 'btn btn-success'])}}
                                         </div>
                                     {{Form::close()}}

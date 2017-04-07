@@ -21,7 +21,8 @@ class NoteController extends Controller
      */
 
     public function getPictures() {
-        return Picture::where('user_ref', Auth::id())->get();
+        $pictures = Picture::where('user_ref', Auth::id())->get();
+        return $pictures;
     }
 
     public function getNote() {
