@@ -71,8 +71,8 @@
                             </div>
                         </div>
                         <h4><small>Images</small></h4>
-                        @if(isset($images))
-                            @foreach($images as $image)
+                        @if(isset($pictures))
+                            @foreach($pictures as $pictures)
                             @endforeach
                         @endif
                         <br />

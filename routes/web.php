@@ -42,4 +42,5 @@ Route::post('/editNote', 'NotesController@update');
 Route::post('/editTbd', 'TBDsController@update');
 
 /* Images Controller*/
-Route::post('/addImage', 'ImagesController@create');
+Route::post('/addPicture', 'PicturesController@create');
+Route::post('/deletePicture', 'PicturesController@deletes');

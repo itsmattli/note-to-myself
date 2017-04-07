@@ -2,14 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Database\Eloquent\ModelNotFoundException;
-use Illuminate\Http\Request;
-use App\Image;
+use App\Picture;
 use App\Link;
 use App\Note;
 use App\Tbd;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Session;
 
 
 class NoteController extends Controller
@@ -19,20 +16,12 @@ class NoteController extends Controller
         $this->middleware('auth');
     }
 
-    public function addImage() {
-        $images = Image::where('user_ref', Auth::id())->count();
-        if ($images >= 4) {
-            Session::flash('error', "You are only allowed 4 images!");
-            return redirect()->back();
-        }
-    }
-
     /*
      * Index functions
      */
 
-    public function getImages() {
-        return Image::where('user_ref', Auth::id())->get();
+    public function getPictures() {
+        return Picture::where('user_ref', Auth::id())->get();
     }
 
     public function getNote() {
@@ -49,10 +38,10 @@ class NoteController extends Controller
 
 
     public function index() {
-        $images = $this->getImages();
+        $pictures = $this->getPictures();
         $note = $this->getNote();
         $links = $this->getLinks();
         $tbd = $this->getTbd();
-        return view('notes', compact('images','links', 'note', 'tbd'));
+        return view('notes', compact('pictures', 'links', 'note', 'tbd'));
     }
 }
