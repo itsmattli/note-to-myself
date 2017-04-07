@@ -30,5 +30,10 @@ Route::get('/home', 'HomeController@index');
 Route::get('logout', '\App\Http\Controllers\Auth\LoginController@logout');
 Route::post('/reg', 'RegistrationController@store');
 
-Route::get('/emailtest', 'NoteController@email');
 Route::get('/reg/verify/{conf_code}', 'ConfirmController@confirm');
+Route::get('/unlock/{conf_code}', 'ConfirmController@unlock');
+
+/* Links*/
+Route::post('/editLink', 'NoteController@editLink');
+Route::post('/deleteLink', 'NoteController@deleteLink');
+Route::post('/addLink', 'NoteController@addLink');

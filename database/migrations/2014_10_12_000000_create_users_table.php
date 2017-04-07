@@ -20,7 +20,8 @@ class CreateUsersTable extends Migration
             $table->rememberToken();
             $table->boolean('confirmed')->default(0);
             $table->string('confirmation_code')->nullable();
-            $table->string('is_active')->default(0);
+            $table->string('locked')->default(0);
+            $table->string('login_attempts')->default(0);
             $table->timestamps();
         });
     }

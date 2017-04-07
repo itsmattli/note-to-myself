@@ -2,41 +2,90 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\Request;
 use App\Image;
 use App\Link;
 use App\Note;
 use App\Tbd;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\Session;
 
 
 class NoteController extends Controller
 {
+    /*
+     * Notes
+     */
+
+    public function editLink(Request $req) {
+        try {
+            $link = Link::findOrFail($req->id);
+        } catch (ModelNotFoundException $e) {
+            Session::flash('error', "Could not edit link, please try again");
+            return redirect()->back();
+        }
+        $link->link = $req->link;
+        $link->save();
+        return redirect()->back();
+    }
+
+    public function deleteLink(Request $req) {
+        try {
+            $link = Link::findOrFail($req->id);
+        } catch (ModelNotFoundException $e) {
+            Session::flash('error', "Could not find associated link, please try again");
+            return redirect()->back();
+        }
+        try {
+            $link->delete();
+        } catch (QueryException $e) {
+            Session::flash('error', "Could not delete associated link, please try again");
+            return redirect()->back();
+        }
+        return redirect()->back();
+    }
+
+    public function addLink(Request $req) {
+        $link = new Link;
+        $link->link = $req->link;
+        $link->user_ref = Auth::id();
+        $link->save();
+        return redirect()->back();
+    }
+
+    /*
+     * Images
+     */
+
+    public function addImage() {
+        $images = Image::where('user_ref', Auth::id())->count();
+        if ($images >= 4) {
+            Session::flash('error', "You are only allowed 4 images!");
+            return redirect()->back();
+        }
+    }
+
+    /*
+     * Index functions
+     */
+
     public function getImages() {
-        return Image::where('user_ref', Auth::id());
+        return Image::where('user_ref', Auth::id())->get();
     }
 
     public function getNotes() {
-        return Note::where('user_ref', Auth::id());
+        return Note::where('user_ref', Auth::id())->get();
     }
 
     public function getLinks() {
-        return Link::where('user_ref', Auth::id());
+        return Link::where('user_ref', Auth::id())->get();
     }
 
     public function getTbds() {
-        return Tbd::where('user_ref', Auth::id());
+        return Tbd::where('user_ref', Auth::id())->get();
     }
 
-    public function email() {
-        $link = 'www.note-to-myself.com';
-        Mail::send('email.confirm', ['link' => $link], function ($m) use ($link) {
-            $m->from('matthewlidev@gmail.com', 'Note To Myself');
-            $m->to('li.matthew.m@gmail.com', 'Matthew')->subject('Your Confirmation Email!');
-        });
-        return view('notes');
-    }
 
     public function index() {
         $images = $this->getImages();
