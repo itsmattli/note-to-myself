@@ -60,8 +60,23 @@
         <div class="row">
             <div class = "col-md-12 images">
                 <div id="imagesdiv" class="notespage">
-                    <h4><small>Images</small></h4>
-                    <br />
+                    <div class="container">
+                        <div class="container">
+                            <div class="container">
+                                {{Form::open(['url' => '/addImage', 'method' => 'POST'])}}
+                                {{Form::label('image', 'Add a New Image')}}
+                                {{Form::file('image', null, ['id' => 'image_up', 'class' => 'form-control'])}}
+                                {{Form::submit('Add Image', ['class' => 'btn btn-success'])}}
+                                {{Form::close()}}
+                            </div>
+                        </div>
+                        <h4><small>Images</small></h4>
+                        @if(isset($images))
+                            @foreach($images as $image)
+                            @endforeach
+                        @endif
+                        <br />
+                    </div>
                 </div>
             </div>
         </div>

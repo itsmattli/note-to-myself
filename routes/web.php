@@ -15,21 +15,18 @@
 Route::get('/', function () {
     return view('welcome');
 });
-
-Auth::routes();
-
 Route::get('/home', 'HomeController@index');
 
-
+/* view('notes') view controller*/
 Route::get('/notes', 'NoteController@index');
 
-Route::get('/captcha', 'LoginController@getCaptcha');
+/* Auth-related Routes*/
 Auth::routes();
-
-Route::get('/home', 'HomeController@index');
-Route::get('logout', '\App\Http\Controllers\Auth\LoginController@logout');
+Route::get('/logout', '\App\Http\Controllers\Auth\LoginController@logout');
 Route::post('/reg', 'RegistrationController@store');
+Route::get('/captcha', 'LoginController@getCaptcha');
 
+/* Confirm Controller*/
 Route::get('/reg/verify/{conf_code}', 'ConfirmController@confirm');
 Route::get('/unlock/{conf_code}', 'ConfirmController@unlock');
 
@@ -38,5 +35,11 @@ Route::post('/editLink', 'LinksController@update');
 Route::post('/deleteLink', 'LinksController@delete');
 Route::post('/addLink', 'LinksController@create');
 
-Route::post('editNote', 'NotesController@update');
-Route::post('editTbd', 'TBDsController@update');
+/* Notes Controller*/
+Route::post('/editNote', 'NotesController@update');
+
+/* TBD Controller*/
+Route::post('/editTbd', 'TBDsController@update');
+
+/* Images Controller*/
+Route::post('/addImage', 'ImagesController@create');
