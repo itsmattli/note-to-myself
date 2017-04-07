@@ -11,6 +11,7 @@ use Illuminate\Support\Facades\Session;
 class NotesController extends Controller
 {
     public function update(Request $req) {
+        Session::flash('active', 'note');
         $note = Note::where('user_ref', Auth::id())->first();
         if(!$note) {
             $note = new Note;
@@ -24,7 +25,6 @@ class NotesController extends Controller
             Session::flash('error', "Could not edit note, please try again");
             return redirect()->back();
         }
-        Session::flash('active', 'note');
-        return redirect()->back();
+        return redirect()->back()->with("success", "Note was updated!");
     }
 }

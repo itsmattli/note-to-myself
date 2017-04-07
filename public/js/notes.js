@@ -1,22 +1,28 @@
-function hideDivs() {
-    $("#notesdiv").hide();
-    $("#tbdsdiv").hide();
-    $("#imagesdiv").hide();
-    $("#linksdiv").hide();
-}
-
 function addOnClick() {
     $("#notebutton").click(function(){
         $("#notesdiv").toggle(500);
+        $("#tbdsdiv").hide();
+        $("#imagesdiv").hide();
+        $("#linksdiv").hide();
     });
     $("#tbdbutton").click(function(){
         $("#tbdsdiv").toggle(500);
+        $("#notesdiv").hide();
+        $("#imagesdiv").hide();
+        $("#linksdiv").hide();
     });
     $("#imagebutton").click(function(){
         $("#imagesdiv").toggle(500);
+        $("#notesdiv").hide();
+        $("#tbdsdiv").hide();
+        $("#linksdiv").hide();
+
     });
     $("#linkbutton").click(function(){
         $("#linksdiv").toggle(500);
+        $("#notesdiv").hide();
+        $("#tbdsdiv").hide();
+        $("#imagesdiv").hide();
     });
 }
 

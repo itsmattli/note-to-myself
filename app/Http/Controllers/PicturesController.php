@@ -15,6 +15,10 @@ use Illuminate\Support\Facades\Validator;
 class PicturesController extends Controller
 {
     public function create(Request $req) {
+        Session::flash("active", "picture");
+        if(!isset($req->image)) {
+            return redirect()->back()->with("error", "No image was selected");
+        }
 
         $validator = Validator::make($req->all(), ['image' => 'required|image|mimes:jpeg,jpg,gif|max:2048']);
         if($validator->fails()) {
@@ -23,7 +27,6 @@ class PicturesController extends Controller
 
         $images = Picture::where('user_ref', Auth::id())->count();
         if ($images >= 4) {
-            Session::flash("active", "picture");
             return redirect()->back()->with("error", "You are only allowed 4 images!" );
         }
 
@@ -33,18 +36,17 @@ class PicturesController extends Controller
         $picture->user_ref = Auth::id();
         $picture->image = $image;
         $picture->save();
-        Session::flash("active", "picture");
         return redirect()->back()->with("success", "Image is uploaded!");
     }
 
     public function delete(Request $req) {
+        Session::flash("active", "picture");
         try {
             $picture = Picture::findOrFail($req->id);
         } catch (ModelNotFoundException $e) {
             return redirect()->back()->with("error", "Image to be deleted could not be found, please try again.");
         }
         $picture->delete();
-        Session::flash("active", "picture");
         return redirect()->back()->with("success", "Image was deleted!");
     }
 

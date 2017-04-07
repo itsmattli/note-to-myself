@@ -11,6 +11,7 @@ use Illuminate\Support\Facades\Session;
 class TBDsController extends Controller
 {
     public function update(Request $req) {
+        Session::flash('active', 'tbd');
         $tbd = Tbd::where('user_ref', Auth::id())->first();
         if(!$tbd) {
             $tbd = new Tbd;
@@ -24,7 +25,6 @@ class TBDsController extends Controller
             Session::flash('error', "Could not edit tbd, please try again");
             return redirect()->back();
         }
-        Session::flash('active', 'tbd');
-        return redirect()->back();
+        return redirect()->back()->with('success', 'TBD was updated!');
     }
 }

@@ -12,6 +12,7 @@ use Illuminate\Support\Facades\Auth;
 class LinksController extends Controller
 {
     public function update(Request $req) {
+        Session::flash('active', 'link');
         try {
             $link = Link::findOrFail($req->id);
         } catch (ModelNotFoundException $e) {
@@ -20,11 +21,11 @@ class LinksController extends Controller
         }
         $link->link = $req->link;
         $link->save();
-        Session::flash('active', 'link');
-        return redirect()->back();
+        return redirect()->back()->with("success", "Link was added!");
     }
 
     public function delete(Request $req) {
+        Session::flash('active', 'link');
         try {
             $link = Link::findOrFail($req->id);
         } catch (ModelNotFoundException $e) {
@@ -37,8 +38,7 @@ class LinksController extends Controller
             Session::flash('error', "Could not delete associated link, please try again");
             return redirect()->back();
         }
-        Session::flash('active', 'link');
-        return redirect()->back();
+        return redirect()->back()->with("success", "Link was deleted!");
     }
 
     public function create(Request $req) {
@@ -47,6 +47,6 @@ class LinksController extends Controller
         $link->user_ref = Auth::id();
         $link->save();
         Session::flash('active', 'link');
-        return redirect()->back();
+        return redirect()->back()->with("success", "Link was created!");
     }
 }

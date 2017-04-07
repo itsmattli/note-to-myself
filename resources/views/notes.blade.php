@@ -2,11 +2,10 @@
 @section('content')
     <head>
         <script src="{{asset('js/notes.js') }}" type="text/javascript"></script>
-
+        <link href="{{asset('css/notes.css')}}" rel="stylesheet">
     </head>
     <script>
         window.onload = function () {
-            hideDivs();
             addOnClick();
             addOnClear();
             @if(session('active'))
@@ -106,7 +105,7 @@
                             <div class="form-inline">
                                 {{Form::open(['url' => '/addLink', 'method' => 'POST'])}}
                                 {{Form::label('link', 'Add a New Link')}}
-                                {{Form::text('link', 'www.examplelink.com', ['class' => 'form-control'])}}
+                                {{Form::text('link', 'http://www.examplelink.com', ['class' => 'form-control', 'size' => '35'])}}
                                 {{Form::submit('Add Link', ['class' => 'btn btn-success'])}}
                                 {{Form::close()}}
                             </div>
@@ -123,7 +122,7 @@
                                 <td>
                                     {{Form::open(["url" => "/editLink", "method" => "POST"])}}
                                         <div class="form-inline">
-                                            <input type="text" name="link" value="{{$link->link}}" onclick='openInNew(this);' class="form-control">
+                                            <input type="text" name="link" size="35" value="{{$link->link}}" onclick='openInNew(this);' class="form-control">
                                             {{Form::hidden('id', $link->id)}}
                                             {{Form::submit('Save', ['class' => 'btn btn-success'])}}
                                         </div>
