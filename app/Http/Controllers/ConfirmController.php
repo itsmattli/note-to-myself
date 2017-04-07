@@ -50,6 +50,7 @@ class ConfirmController extends Controller
         }
 
         $user->locked = 0;
+        $user->login_attempts = 0;
         $user->confirmation_code = null;
         try {
             $user->save();

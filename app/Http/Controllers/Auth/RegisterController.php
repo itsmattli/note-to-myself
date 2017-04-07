@@ -3,9 +3,11 @@
 namespace App\Http\Controllers\Auth;
 
 use App\User;
+use Illuminate\Support\Facades\Mail;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
+use Illuminate\Support\Facades\Session;
 
 class RegisterController extends Controller
 {
@@ -27,7 +29,7 @@ class RegisterController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = '/notes';
+    protected $redirectTo = '/login';
 
     /**
      * Create a new controller instance.
@@ -62,11 +64,17 @@ class RegisterController extends Controller
     protected function create(array $data)
     {
         $conf = str_random(30);
-        return User::create([
+        $user = User::create([
             'confirmation_code' => $conf,
             'email' => $data['email'],
             'password' => bcrypt($data['password']),
         ]);
 
+        Mail::send('email.confirm', ['confirmation_code' => $conf], function($message) use ($user) {
+            $message->to($user->email, null)
+                ->subject('Verify your email address');
+        });
+        Session::flash('confirm', 'Confirmation email sent, please check your email to activate your account!');
+        return $user;
     }
 }
