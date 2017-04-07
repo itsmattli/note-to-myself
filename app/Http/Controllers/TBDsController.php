@@ -24,6 +24,7 @@ class TBDsController extends Controller
             Session::flash('error', "Could not edit tbd, please try again");
             return redirect()->back();
         }
+        Session::flash('active', 'tbd');
         return redirect()->back();
     }
 }

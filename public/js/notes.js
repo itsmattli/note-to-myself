@@ -40,3 +40,16 @@ function getAbsoluteUrl(url) {
     a.href = url;
     return a.href;
 }
+
+function revealSection(session_active) {
+    console.log(session_active.toString());
+    if (session_active == "image") {
+        $("#imagesdiv").show();
+    } else if (session_active == "note") {
+        $("#notesdiv").show();
+    } else if (session_active == "tbd") {
+        $("#tbdsdiv").show();
+    } else if (session_active == "link") {
+        $("#linksdiv").show();
+    }
+}

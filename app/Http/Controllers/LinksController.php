@@ -20,6 +20,7 @@ class LinksController extends Controller
         }
         $link->link = $req->link;
         $link->save();
+        Session::flash('active', 'link');
         return redirect()->back();
     }
 
@@ -36,6 +37,7 @@ class LinksController extends Controller
             Session::flash('error', "Could not delete associated link, please try again");
             return redirect()->back();
         }
+        Session::flash('active', 'link');
         return redirect()->back();
     }
 
@@ -44,6 +46,7 @@ class LinksController extends Controller
         $link->link = $req->link;
         $link->user_ref = Auth::id();
         $link->save();
+        Session::flash('active', 'link');
         return redirect()->back();
     }
 }

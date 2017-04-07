@@ -24,6 +24,7 @@ class NotesController extends Controller
             Session::flash('error', "Could not edit note, please try again");
             return redirect()->back();
         }
+        Session::flash('active', 'note');
         return redirect()->back();
     }
 }

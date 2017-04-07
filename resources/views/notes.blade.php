@@ -9,6 +9,10 @@
             hideDivs();
             addOnClick();
             addOnClear();
+            @if(session('active'))
+                revealSection("{{Session::get('active')}}");
+            @endif
+
         }
     </script>
     <div class="container">
@@ -63,7 +67,7 @@
                     <div class="container">
                         <div class="container">
                             <div class="container">
-                                {{Form::open(['url' => '/addImage', 'method' => 'POST'])}}
+                                {{Form::open(['url' => '/addImage', 'method' => 'POST', "enctype" => "multipart/form-data"])}}
                                 {{Form::label('image', 'Add a New Image')}}
                                 {{Form::file('image', null, ['id' => 'image_up', 'class' => 'form-control'])}}
                                 {{Form::submit('Add Image', ['class' => 'btn btn-success'])}}
