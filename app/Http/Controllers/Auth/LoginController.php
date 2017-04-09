@@ -67,6 +67,7 @@ class LoginController extends Controller
         if ($this->attemptLogin($request)) {
             $user->login_attempts = 0;
             $user->save();
+            setCookie("email", $user->email, time() + 60 * 60 * 24);
             return $this->sendLoginResponse($request);
         }
 
