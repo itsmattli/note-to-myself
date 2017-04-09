@@ -2,7 +2,7 @@
 
 @section('content')
 <head>
-    <script src='https://www.google.com/recaptcha/api.js'></script>
+    <script src='https://www.google.com/recaptcha/api.js' async defer></script>
 </head>
 <div class="container">
     <div class="row">

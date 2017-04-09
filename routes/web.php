@@ -24,7 +24,6 @@ Route::get('/notes', 'NoteController@index');
 Auth::routes();
 Route::get('/logout', '\App\Http\Controllers\Auth\LoginController@logout');
 Route::post('/reg', 'RegistrationController@store');
-Route::get('/captcha', 'LoginController@getCaptcha');
 
 /* Confirm Controller*/
 Route::get('/reg/verify/{conf_code}', 'ConfirmController@confirm');
