@@ -36,19 +36,19 @@ function addOnClear() {
 }
 
 function openInNew(textbox){
-    console.log("in");
     window.open(getAbsoluteUrl(textbox.value));
     this.blur();
 }
 
 function getAbsoluteUrl(url) {
-    var a = document.createElement('a');
-    a.href = url;
-    return a.href;
+    var exp = 'http://';
+    if (!url.match(exp)) {
+        url = 'http://' + url;
+    }
+    return url;
 }
 
 function revealSection(session_active) {
-    console.log(session_active.toString());
     if (session_active == "picture") {
         $("#imagesdiv").show();
     } else if (session_active == "note") {
