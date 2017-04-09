@@ -78,7 +78,7 @@
                         </div>
                         <h4><small>Images</small></h4>
                         @if(isset($pictures))
-                            <table>
+                            <table id="pictures_table">
                                 <tr>
                                 @foreach($pictures as $picture)
                                     <td>

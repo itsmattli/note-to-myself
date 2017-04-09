@@ -1,9 +1,6 @@
 @extends('layouts.app')
 
 @section('content')
-<head>
-    <script src='https://www.google.com/recaptcha/api.js' async defer></script>
-</head>
 <div class="container">
     <div class="row">
         <div class="col-md-8 col-md-offset-2">
@@ -47,9 +44,14 @@
                                 <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required>
                             </div>
                         </div>
-                        <div class="form-group">
+                        <div class="form-group{{ $errors->has('g-recaptcha-response') ? ' has-error' : '' }}">
                             <div class="col-md-6 col-md-offset-4">
-                                <div class="g-recaptcha" data-sitekey="{{ env('RE_CAP_SITE') }}"></div>
+                                {!! app('captcha')->display() !!}
+                                @if ($errors->has('g-recaptcha-response'))
+                                    <span class="help-block">
+                                        <strong>{{ $errors->first('g-recaptcha-response') }}</strong>
+                                    </span>
+                                @endif
                             </div>
                         </div>
 

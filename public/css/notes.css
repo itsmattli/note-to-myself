@@ -2,3 +2,12 @@ div.notespage {
     display:none;
 }
 
+#pictures_table td {
+    padding: 5px;
+}
+#pictures_table img {
+    max-width: 300px;
+    max-height: 300px;
+    width: auto;
+    height: auto;
+}
